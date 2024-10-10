@@ -4,6 +4,11 @@ class decode_env_configuration extends uvm_object;
     decode_in_configuration de_in_config;
     decode_out_configuration de_out_config;
 
+    // Scoreboard flags
+    bit scbd_drain  = 1;
+    bit scbd_empty  = 1;
+    bit scbd_active = 1;
+
 
     function new (string name = "");
         super.new(name);

@@ -28,10 +28,11 @@ class decode_in_agent extends uvm_agent;
         coverage = new("coverage",this);
         ap = new();
 
-         // Get the configuration handle
-        if (!(uvm_config_db #(decode_in_configuration)::get(this,"","conf_de_in_ag",conf))) begin 
-            `uvm_fatal("Decode_in_Agent","Failed to get configuration handle!");
-        end
+        // Not required since we do direct assignments in this project for efficiency
+        // // Get the configuration handle
+        // if (!(uvm_config_db #(decode_in_configuration)::get(this,"","conf_de_in_ag",conf))) begin 
+        //     `uvm_fatal("Decode_in_Agent","Failed to get configuration handle!");
+        // end
 
         // Pass the bfm handles to the components
         driver.bfm = conf.driver_bfm_hndl;

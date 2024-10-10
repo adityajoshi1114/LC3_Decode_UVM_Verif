@@ -26,7 +26,7 @@ class decode_in_configuration extends uvm_object;
     endfunction
 
     // Initialize Function
-    virtual function void initialize(bit activity, string interface_names[2], string path_to_agent);
+    virtual function void initialize(bit activity, string interface_names[2]);
 
         Activity = activity;
 
@@ -38,8 +38,9 @@ class decode_in_configuration extends uvm_object;
             `uvm_fatal("de_in_config","Failed to get driver_bfm handle!")
         end
 
+        // Not required since we do direct assignments in this project for efficiency
         // Passes itself to its agent
-        uvm_config_db#(decode_in_configuration)::set(null,path_to_agent,"conf_de_in_ag",this);
+        //uvm_config_db#(decode_in_configuration)::set(null,path_to_agent,"conf_de_in_ag",this);
 
     endfunction
 

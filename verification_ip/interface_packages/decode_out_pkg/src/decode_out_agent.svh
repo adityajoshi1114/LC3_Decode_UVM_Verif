@@ -1,7 +1,7 @@
 class decode_out_agent extends uvm_agent;
 
     // Child Component
-    decode_out_monitor      monitor;
+    decode_out_monitor          monitor;
 
     // Config Handle
     decode_out_configuration    conf;   // Handle assigned directly by the environment
@@ -21,11 +21,11 @@ class decode_out_agent extends uvm_agent;
         monitor = new("monitor",this);
         ap = new();
 
+        // Not required since we do direct assignments in this project for efficiency
         // Do a get call for the corresponding config 
-        if (!(uvm_config_db #(decode_out_configuration)::get(this,"","conf_de_out_ag",conf))) begin 
-            `uvm_fatal("Decode_out_Agent","Failed to get configuration handle!");
-        end
-        
+        // if (!(uvm_config_db #(decode_out_configuration)::get(this,"","conf_de_out_ag",conf))) begin 
+        //     `uvm_fatal("Decode_out_Agent","Failed to get configuration handle!");
+        // end
         
         // Pass the monitor bfm handle to the monitor
         monitor.bfm = conf.monitor_bfm_handle;
