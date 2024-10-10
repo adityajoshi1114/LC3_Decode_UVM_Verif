@@ -9,4 +9,5 @@ project_benches/decode/sim/run.log
 project_benches/decode/sim/sysinfo.log
 project_benches/decode/sim/visualizer.log
 project_benches/decode/sim/viswave.do
+project_benches/decode/sim/.*
 

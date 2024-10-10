@@ -42,11 +42,14 @@ class decode_scoreboard #(type T = decode_out_transaction) extends uvm_component
             pred_trx = expected_results.pop_front();
 
             // Compare 
-            dut_trx.compare(pred_trx,comparer)
-
-
-
-        
+            if (dut_trx.compare(pred_trx,comparer)) begin 
+                match_cnt++;
+                `uvm_info("Decode_Scoreboard","Transaction MATCH!")
+            end else begin 
+                mismatch_cnt++;
+                `uvm_info("Decode_Scoreboard","Transaction MISMATCH!")
+            end
+        end
     endfunction
 
     virtual function void phase_ready_to_end (uvm_phase phase);
