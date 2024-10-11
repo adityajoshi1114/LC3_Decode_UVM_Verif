@@ -12,6 +12,9 @@ class decode_in_agent extends uvm_agent;
     // Config handle
     decode_in_configuration                 conf;
 
+    // This agent's activity state
+    bit activity;
+
     function new (string name = "", uvm_component parent = null);
         super.new(name,parent);
     endfunction
@@ -20,6 +23,8 @@ class decode_in_agent extends uvm_agent;
 
         //  Since youre overwriting the parent class' build phase function, make sure you call it here
         super.build_phase(phase);
+
+        activity = conf.Activity;
 
         // Instantiate all the components of this agent  
         sqr = new("sqr",this);
@@ -37,6 +42,10 @@ class decode_in_agent extends uvm_agent;
         // Pass the bfm handles to the components
         driver.bfm = conf.driver_bfm_hndl;
         monitor.bfm = conf.monitor_bfm_hndl;
+
+        // Pass the sequencer handle to the config
+        conf.set_sqr(sqr);
+
 
     endfunction
     

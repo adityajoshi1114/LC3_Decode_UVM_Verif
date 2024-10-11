@@ -9,6 +9,9 @@ class decode_out_agent extends uvm_agent;
     // Analysis Port
     uvm_analysis_port #(decode_out_transaction) ap;
 
+    // This agent's activity state
+    bit activity;
+
     function new (string name = "", uvm_component parent = null);
         super.new(name,parent);
     endfunction
@@ -16,6 +19,8 @@ class decode_out_agent extends uvm_agent;
     virtual function void build_phase (uvm_phase phase);
 
         super.build_phase();
+
+        activity = conf.Activity;
 
         // Instantiate the components of this agent
         monitor = new("monitor",this);

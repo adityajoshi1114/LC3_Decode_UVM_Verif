@@ -15,7 +15,7 @@ class decode_in_configuration extends uvm_object;
         super.new(name);
     endfunction
 
-    // For test to store the sequencer handle
+    // For agent to store the sequencer handle
     function void set_sqr (uvm_sequencer #(decode_in_seq_item) agent_sqr);
         sqr = agent_sqr;
     endfunction
@@ -29,6 +29,7 @@ class decode_in_configuration extends uvm_object;
     virtual function void initialize(bit activity, string interface_names[2]);
 
         Activity = activity;
+    
 
         // Get the BFM handles via the config db
         if (!(uvm_config_db#(virtual decode_in_monitor_bfm)::get(null,get_name(),interface_names[0],monitor_bfm_hndl))) begin 
@@ -40,8 +41,9 @@ class decode_in_configuration extends uvm_object;
 
         // Not required since we do direct assignments in this project for efficiency
         // Passes itself to its agent
-        //uvm_config_db#(decode_in_configuration)::set(null,path_to_agent,"conf_de_in_ag",this);
+        // uvm_config_db#(decode_in_configuration)::set(null,path_to_agent,"conf_de_in_ag",this);
 
     endfunction
+
 
 endclass

@@ -38,14 +38,14 @@ class decode_scoreboard #(type T = decode_out_transaction) extends uvm_component
 
         // Extract the oldest item from queue if the queue is not empty
         if(!expected_results.size()) begin 
-            `uvm_info("Decode_Scoreboard","No Expected Transactions to compare with Actual Transaction")
+            `uvm_error("Decode_Scoreboard","No Expected Transactions to compare with Actual Transaction!!")
         end else begin 
             pred_trx = expected_results.pop_front();
 
             // Compare 
             if (dut_trx.compare(pred_trx,comparer)) begin 
                 match_cnt++;
-                `uvm_info("Decode_Scoreboard","Transaction MATCH!",UVM_LOW)
+                `uvm_error("Decode_Scoreboard","Transaction MATCH!",UVM_LOW)        // For this project, all 50 transactions should match
             end else begin 
                 mismatch_cnt++;
                 `uvm_info("Decode_Scoreboard","Transaction MISMATCH!",UVM_LOW)
@@ -72,7 +72,7 @@ class decode_scoreboard #(type T = decode_out_transaction) extends uvm_component
     endfunction
 
     virtual task wait_for_drain();
-        while (!expected_results.size()) begin 
+        while (expected_results.size() != 0) begin 
             wait(got_trx.triggered);
         end
     endtask
@@ -92,7 +92,7 @@ class decode_scoreboard #(type T = decode_out_transaction) extends uvm_component
     endfunction
 
     virtual function void report_phase (uvm_phase phase);
-        `uvm_info("Scoreboard Summary",$sformatf("Total Transactions : %0d  Transaction Matches : %0d  Transaction Mismatches : %0d ",trx_cnt,match_cnt,mismatch_cnt))
+        `uvm_info("Scoreboard Summary",$sformatf("Total Transactions : %0d  Transaction Matches : %0d  Transaction Mismatches : %0d ",trx_cnt,match_cnt,mismatch_cnt),UVM_HIGH)
     endfunction
 
 endclass

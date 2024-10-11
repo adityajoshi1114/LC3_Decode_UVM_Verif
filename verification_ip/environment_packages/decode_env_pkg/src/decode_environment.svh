@@ -9,13 +9,29 @@ class decode_environment extends uvm_environment;
     // Config
     decode_env_configuration    conf;
 
-
+    // Sequencer handles
+    uvm_sequencer #(.T(decode_in_seq_item))in_sqr;
 
     function new (string name = "", uvm_component parent = null);
         super.new(name,parent);
     endfunction
 
     virtual function void build_phase (uvm_phase phase);
+
+        // Instantiate all the components
+        agent_in = new("agent_in",this);
+        agent_out = new("agent_out",this);
+        predictor = new("predictor",this);
+        scoreboard = new("scoreboard",this);
+
+        // Assign config handles to the respective agents
+        agent_in.conf = conf.agent_in_conf;
+        agent_out.conf = conf.agent_out_conf;
+
+        // Assign flags to Scoreboard
+        scoreboard.wait_for_drain       = conf.scbd_drain;
+        scoreboard.check_empty_eot      = conf.scbd_empty;
+        scoreboard.check_activity_eot   = conf.scbd_active;
 
     endfunction
 
@@ -24,13 +40,13 @@ class decode_environment extends uvm_environment;
     virtual function void connect_phase(uvm_phase phase);
     
         // Agent_in and Pred
-        decode_in_agent.ap.connect(predictor.analysis_export);
+        agent_in.ap.connect(predictor.analysis_export);
 
         // Pred and Scbd
-
+        predictor.ap.connect(scoreboard.analysis_export_expected);
 
         // Scbd and Agent_out
-
+        agent_out.ap.connect(scoreboard.analysis_export_actual);
 
     endfunction
 endclass
