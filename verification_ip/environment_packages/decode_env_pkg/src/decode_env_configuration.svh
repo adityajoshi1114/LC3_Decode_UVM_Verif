@@ -30,13 +30,13 @@ class decode_env_configuration extends uvm_object;
         de_out_interfaces[1] = interface_names[3];
 
         // Initialize sub configs
-        decode_in_configuration.initialize(activity_flags[0], de_in_interfaces);
-        decode_out_configuration.initialize(activity_flags[1], de_out_interfaces);
+        de_in_config.initialize(activity_flags[0], de_in_interfaces);
+        de_out_config.initialize(activity_flags[1], de_out_interfaces);
 
         // Scbd flags
-        scbd_drain  = scbd[0];
-        scbd_active = scbd[1];
-        scbd_empty  = scbd[2];
+        scbd_drain  = scbd_flags[0];
+        scbd_active = scbd_flags[1];
+        scbd_empty  = scbd_flags[2];
 
     endfunction
 

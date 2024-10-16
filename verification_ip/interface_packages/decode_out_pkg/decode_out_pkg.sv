@@ -5,10 +5,10 @@ package decode_out_pkg;
 
 
     // Include all the classes
-    `include "decode_out_transaction.svh"
-    `include "decode_out_monitor.svh"
-    `include "decode_out_configuration.svh"
-    `include "decode_out_agent.svh"
+    `include "src/decode_out_transaction.svh"
+    `include "src/decode_out_monitor.svh"
+    `include "src/decode_out_configuration.svh"
+    `include "src/decode_out_agent.svh"
 
 
 endpackage

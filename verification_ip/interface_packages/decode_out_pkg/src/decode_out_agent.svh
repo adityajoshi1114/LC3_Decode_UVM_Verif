@@ -18,13 +18,13 @@ class decode_out_agent extends uvm_agent;
 
     virtual function void build_phase (uvm_phase phase);
 
-        super.build_phase();
+        super.build_phase(phase);
 
         activity = conf.Activity;
 
         // Instantiate the components of this agent
         monitor = new("monitor",this);
-        ap = new();
+        ap = new("ap",this);
 
         // Not required since we do direct assignments in this project for efficiency
         // Do a get call for the corresponding config 
@@ -40,7 +40,7 @@ class decode_out_agent extends uvm_agent;
     virtual function void connect_phase(uvm_phase phase);
 
         // Connect Agent ap to monitor ap
-        ap.connect(monitor.ap);
+        monitor.ap.connect(this.ap);
         
     endfunction
 

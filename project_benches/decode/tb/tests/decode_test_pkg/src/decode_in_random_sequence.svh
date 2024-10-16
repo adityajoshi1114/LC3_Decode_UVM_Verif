@@ -14,7 +14,7 @@ class decode_in_random_sequence extends decode_in_sequence_base;
     virtual task body ();
 
         // Initiate
-        `uvm_info("RANDOM SEQUENCE","Requesting sequencer for sending a transaction to the driver",UVM_MEDIUM);
+        //`uvm_info("RANDOM SEQUENCE","Requesting sequencer for sending a transaction to the driver",UVM_LOW);
         start_item(de_in_si);
 
         // Randomize 
@@ -22,7 +22,7 @@ class decode_in_random_sequence extends decode_in_sequence_base;
         de_in_si.next_pc = de_in_si.next_pc + 1;  // Incrementing npc for every transaction
 
         // Send 
-        `uvm_info("RANDOM SEQUENCE",{"Sending:", de_in_si.convert2string()} ,UVM_MEDIUM);
+       // `uvm_info("RANDOM SEQUENCE",{"Sending:", de_in_si.convert2string()} ,UVM_LOW);
         finish_item(de_in_si);
 
     endtask

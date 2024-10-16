@@ -4,7 +4,7 @@ class decode_out_transaction extends uvm_transaction;
     bit [5:0]   E_ctrl;
     bit [1:0]   W_ctrl;
     bit         M_ctrl;
-    bit [15:0]  ir,
+    bit [15:0]  ir;
     bit [15:0]  npc_out;
 
     function new (string name = "");
@@ -20,12 +20,22 @@ class decode_out_transaction extends uvm_transaction;
         if (!$cast(RHS,rhs)) return 0;
         return (
                 super.do_compare(rhs,comparer)
-                &&(this.E_ctrl  == RHS.E_ctrl)
+                &&(e_compare(RHS.ir[15:12],RHS.E_ctrl))
                 &&(this.W_ctrl  == RHS.W_ctrl)
                 &&(this.M_ctrl  == RHS.M_ctrl)
                 &&(this.ir      == RHS.ir)
-                &&(this.ncp_out == RHS.ncp_out)
+                &&(this.npc_out == RHS.npc_out)
                 );
+    endfunction
+
+    function bit e_compare (bit [3:0] opcode, bit [5:0] e);
+
+        if (opcode == 9) begin      // NOT
+            return (this.E_ctrl[5:1] == e[5:1]);
+        end else begin 
+            return (this.E_ctrl == e);
+        end
+
     endfunction
 
 

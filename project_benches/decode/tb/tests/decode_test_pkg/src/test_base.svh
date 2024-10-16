@@ -50,6 +50,7 @@ class test_base extends uvm_test;
         repeat (50) begin 
             de_in_se.start(de_env.agent_in.sqr);
         end
+        #100ns;
         phase.drop_objection(this,"Objection dropped by test_base");
 
     endtask

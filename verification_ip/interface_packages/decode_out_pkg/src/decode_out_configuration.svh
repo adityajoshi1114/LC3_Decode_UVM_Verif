@@ -8,12 +8,12 @@ class decode_out_configuration extends uvm_object;
         super.new(name);
     endfunction
 
-    virtual function void initialize(bit activity, string interface_names[2], strng path_to_agent);
+    virtual function void initialize(bit activity, string interface_names[2]);
        
         Activity = activity;
         
         // Do a get call for the monitor bfm handle
-        uvm_config_db#(virtual decode_out_monitor_bfm)::get(null,get_name(),interface_names[0],vbfm);
+        uvm_config_db#(virtual decode_out_monitor_bfm)::get(null,get_name(),interface_names[0],monitor_bfm_handle);
 
     endfunction 
 

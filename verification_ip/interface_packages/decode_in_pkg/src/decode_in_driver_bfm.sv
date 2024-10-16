@@ -5,6 +5,9 @@ interface decode_in_driver_bfm (decode_in_if sig_bndl);
     logic [15:0]    dout_int ;
     bit             enable_decode_int ;
     logic [15:0]    npc_in_int;
+
+    // Flags
+    bit trx_rcvd;
     
     // Connect
     assign sig_bndl.dout_s                  = dout_int ;
@@ -14,6 +17,9 @@ interface decode_in_driver_bfm (decode_in_if sig_bndl);
 
     // Write the task to drive 
     task drive (input bit [15:0] instruction, input bit [15:0] next_pc ); 
+
+        // Raise the flag
+        trx_rcvd <= 1;
 
         // Start driving signals if the reset is done
         fork
@@ -39,8 +45,21 @@ interface decode_in_driver_bfm (decode_in_if sig_bndl);
         dout_int     <= instruction;
         npc_in_int   <= next_pc ;
 
+        // Reset the flag 
+        trx_rcvd <= 0 ;
+
 
     endtask
+
+    initial begin : Driving_En_de_low
+        forever begin 
+            @(posedge sig_bndl.clock_s);
+            if (!trx_rcvd) begin 
+                @(posedge sig_bndl.clock_s);
+                enable_decode_int <=0;
+            end
+        end
+    end
 
 
 endinterface

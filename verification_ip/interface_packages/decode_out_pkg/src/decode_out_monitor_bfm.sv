@@ -1,3 +1,4 @@
+`timescale 1ns / 10ps
 interface decode_out_monitor_bfm(decode_out_if sig_bndl);
 
     // Internal signals for ease of monitoring
@@ -9,6 +10,10 @@ interface decode_out_monitor_bfm(decode_out_if sig_bndl);
     wire [15:0]     npc_out_i;
     wire            en_de_i;
 
+    // Flags
+    bit stop;
+
+
     // Assign the bus values to the internal signals
     assign clock_i      =   sig_bndl.clock_s;
     assign e_cntrl_i    =   sig_bndl.e_cntrl_s;
@@ -19,7 +24,7 @@ interface decode_out_monitor_bfm(decode_out_if sig_bndl);
     assign en_de_i      =   sig_bndl.en_de_s;
 
     // Monitoring 
-    task monitor (output e_cntrl, output m_cntrl, output w_cntrl, output Instr_Reg, output npc_out);
+    task monitor (output bit [5:0] e_cntrl, output bit m_cntrl, output bit [1:0] w_cntrl, output bit [15:0] Instr_Reg, output bit [15:0] npc_out);
 
         // Every output is generated at the posedge
         @(posedge clock_i);
@@ -31,9 +36,25 @@ interface decode_out_monitor_bfm(decode_out_if sig_bndl);
             w_cntrl     = w_cntrl_i;
             Instr_Reg   = Instr_Reg_i;
             npc_out     = npc_out_i;
-        end
+        end 
         
     endtask
+
+    initial begin : wait_for_end
+
+        fork
+            begin 
+                @(posedge en_de_i);
+                @(negedge en_de_i);
+                stop = 1;
+            end
+            begin 
+                #200ms;
+            end
+        join_any
+        disable fork;
+
+    end
 
     
 

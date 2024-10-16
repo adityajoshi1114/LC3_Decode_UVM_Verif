@@ -31,7 +31,7 @@ class decode_in_agent extends uvm_agent;
         monitor = new("monitor",this);
         driver = new("driver",this);
         coverage = new("coverage",this);
-        ap = new();
+        ap = new("ap",this);
 
         // Not required since we do direct assignments in this project for efficiency
         // // Get the configuration handle
@@ -59,7 +59,7 @@ class decode_in_agent extends uvm_agent;
         monitor.ap.connect(coverage.analysis_export);
 
         // Connect agent ap to monitor ap
-        ap.connect(monitor.ap);
+        monitor.ap.connect(this.ap);
 
     endfunction
 

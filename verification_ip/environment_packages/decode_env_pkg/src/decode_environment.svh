@@ -1,4 +1,4 @@
-class decode_environment extends uvm_environment;
+class decode_environment extends uvm_env;
 
     // Environment Class Components
     decode_in_agent             agent_in;
@@ -10,7 +10,7 @@ class decode_environment extends uvm_environment;
     decode_env_configuration    conf;
 
     // Sequencer handles
-    uvm_sequencer #(.T(decode_in_seq_item))in_sqr;
+    uvm_sequencer #(decode_in_seq_item) in_sqr;
 
     function new (string name = "", uvm_component parent = null);
         super.new(name,parent);
@@ -25,11 +25,11 @@ class decode_environment extends uvm_environment;
         scoreboard = new("scoreboard",this);
 
         // Assign config handles to the respective agents
-        agent_in.conf = conf.agent_in_conf;
-        agent_out.conf = conf.agent_out_conf;
+        agent_in.conf = conf.de_in_config;
+        agent_out.conf = conf.de_out_config;
 
         // Assign flags to Scoreboard
-        scoreboard.wait_for_drain       = conf.scbd_drain;
+        scoreboard.wait_drain       = conf.scbd_drain;
         scoreboard.check_empty_eot      = conf.scbd_empty;
         scoreboard.check_activity_eot   = conf.scbd_active;
 
