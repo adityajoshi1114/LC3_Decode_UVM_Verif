@@ -17,12 +17,12 @@ class decode_in_driver extends uvm_driver #(.REQ(decode_in_seq_item), .RSP(decod
 
     virtual task run_phase (uvm_phase phase);
         forever begin 
-            //`uvm_info("Driver","Requesting a transaction from the Sequencer",UVM_LOW)
+            `uvm_info("Driver","Requesting a transaction from the Sequencer",UVM_HIGH)
             seq_item_port.get_next_item(seq_item);
 
             // Extract the variables from this transaction and drive them using the bfm
             bfm.drive({seq_item.opcode,seq_item.instr_tail},seq_item.next_pc);
-            //`uvm_info ("Driver",{"Driven:",seq_item.convert2string()},UVM_LOW)
+            `uvm_info ("Driver",{"Driven:",seq_item.convert2string()},UVM_HIGH)
 
             // Signal the sequencer to arbitrate amongst the next seq items
             seq_item_port.item_done(seq_item);

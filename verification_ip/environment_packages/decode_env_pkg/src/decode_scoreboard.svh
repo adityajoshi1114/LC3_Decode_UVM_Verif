@@ -32,7 +32,7 @@ class decode_scoreboard #(type T = decode_out_transaction) extends uvm_component
     endfunction
 
     virtual function void write_expected (T exp_trx);
-        //`uvm_info("Decode_Scoreboard","Transaction receieved from Predictor",UVM_MEDIUM)
+        `uvm_info("Decode_Scoreboard","Transaction receieved from Predictor",UVM_HIGH)
         //$display("Received trx from Pred : %s",exp_trx.convert2string());
         expected_results.push_front(exp_trx);
         trx_cnt++;
@@ -44,7 +44,7 @@ class decode_scoreboard #(type T = decode_out_transaction) extends uvm_component
         T pred_trx;
 
         // Print info
-        //`uvm_info("Decode_Scoreboard","Transaction receieved from DUT",UVM_MEDIUM)
+        `uvm_info("Decode_Scoreboard","Transaction receieved from DUT",UVM_HIGH)
 
         // Trigger the event
         ->got_trx;
@@ -60,7 +60,7 @@ class decode_scoreboard #(type T = decode_out_transaction) extends uvm_component
             // Compare 
             if (dut_trx.compare(pred_trx,comp)) begin 
                 match_cnt++;
-                `uvm_info("Decode_Scoreboard","Transaction MATCH!",UVM_MEDIUM)        // For this project, all 50 transactions should match
+                `uvm_info("Decode_Scoreboard","Transaction MATCH!",UVM_LOW)        // For this project, all 50 transactions should match
             end else begin 
                 mismatch_cnt++;
                 `uvm_error("Decode_Scoreboard","Transaction MISMATCH!")
@@ -110,7 +110,7 @@ class decode_scoreboard #(type T = decode_out_transaction) extends uvm_component
 
     virtual function void report_phase (uvm_phase phase);
         report_string = $sformatf("Total Transactions : %0d  Transaction Matches : %0d  Transaction Mismatches : %0d ",trx_cnt,match_cnt,mismatch_cnt);
-        `uvm_info("Scoreboard_Summary",report_string,UVM_MEDIUM)
+        `uvm_info("Scoreboard_Summary",report_string,UVM_LOW)
     endfunction
 
 endclass

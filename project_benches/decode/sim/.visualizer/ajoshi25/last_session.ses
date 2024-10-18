@@ -2,32 +2,33 @@
 <!DOCTYPE visualizer_session>
 <session skip_do_file="0" version="3">
  <app argc="8">
-  <argv value="vsim" pos="0"/>
-  <argv value="+onfinish+stop" pos="1"/>
-  <argv value="+UVM_TESTNAME=test_base" pos="2"/>
-  <argv value="+UVM_VERBOSITY=UVM_MEDIUM" pos="3"/>
-  <argv value="-do" pos="4"/>
-  <argv value="set IterationLimit 140000; set NoQuitOnFinish 1; run -all; do viswave.do; coverage save -onexit cov_test_top.ucdb;" pos="5"/>
-  <argv value="+designfile+design.bin" pos="6"/>
-  <argv value="+_sv_debug_+vsim-64-onfinishstop-classdebug-uvmcontrol=all-msgmodeboth+UVM_TESTNAME=test_base+UVM_VERBOSITY=UVM_MEDIUM-qwavedb=+signal+memory=1024+report+parameter+class+assertion+uvm_schematic+msg+classmemory=1024+statictaskfunc+transaction=uvm_test_top/de_env/agent_in/monitor/txn_stream-libqrun.out/work-statslogqrun.out/stats_logqrun_opt-appendlog" pos="7"/>
+  <argv pos="0" value="vsim"/>
+  <argv pos="1" value="+onfinish+stop"/>
+  <argv pos="2" value="+UVM_TESTNAME=test_base"/>
+  <argv pos="3" value="+UVM_VERBOSITY=UVM_MEDIUm"/>
+  <argv pos="4" value="-do"/>
+  <argv pos="5" value="set IterationLimit 140000; set NoQuitOnFinish 1; run -all; do viswave.do; coverage save -onexit cov_test_top.ucdb;"/>
+  <argv pos="6" value="+designfile+design.bin"/>
+  <argv pos="7" value="+_sv_debug_+vsim-64-onfinishstop-classdebug-uvmcontrol=all-msgmodeboth+UVM_TESTNAME=test_base+UVM_VERBOSITY=UVM_MEDIUm-qwavedb=+signal+memory=1024+report+parameter+class+assertion+uvm_schematic+msg+classmemory=1024+statictaskfunc+transaction=uvm_test_top/de_env/agent_in/monitor/txn_stream+transaction=uvm_test_top/de_env/agent_out/monitor/txn_stream-libqrun.out/work-statslogqrun.out/stats_logqrun_opt-appendlog"/>
  </app>
  <window_config>
-  <dockareas top="0" right="621" left="602" bottom="302"/>
-  <taborder right="watch+drvrecadv+" left="files+structure+testbench+" bottom="transcript+"/>
-  <activetab right="drvrecadv" left="testbench" activewindow="transcript" bottom="transcript"/>
-  <window x="0" y="0" type="files" undocked="0" dock_location="left" visible="1"/>
-  <window x="0" y="0" type="structure" undocked="0" dock_location="left" visible="1"/>
-  <window x="0" y="0" type="testbench" undocked="0" dock_location="left" visible="1"/>
-  <window x="0" y="0" type="watch" undocked="0" dock_location="right" visible="1"/>
-  <window x="0" y="0" type="drvrecadv" undocked="0" dock_location="right" visible="1"/>
-  <window x="0" y="0" type="transcript" undocked="0" dock_location="bottom" visible="1"/>
-  <window width="2249" x="1728" y="0" type="rtl" undocked="0" height="1165" visible="1"/>
-  <window width="1440" x="9" y="0" type="wave" undocked="1" height="853" dock_location="bottom" visible="1"/>
-  <window x="0" y="0" type="source" undocked="0" dock_location="center" firstVisibleLine="1" visible="0" path="/mnt/ncsudrive/a/ajoshi25/ECE-748_git/LC3_UVM_Verif/project_benches/decode/tb/testbench/hdl_top.sv"/>
-  <window x="0" y="0" type="source" undocked="0" dock_location="center" firstVisibleLine="411" visible="1" id="1" path="/mnt/apps/public/COE/mg_apps/questa2024.2/questasim/verilog_src/uvm-1.1d/src/base/uvm_root.svh"/>
+  <dockareas left="204" right="621" top="0" bottom="302"/>
+  <taborder left="files+structure+testbench+" right="watch+drvrecadv+streams+" bottom="transcript+"/>
+  <activetab left="testbench" right="streams" activewindow="streams" bottom="transcript"/>
+  <window x="0" undocked="0" type="files" visible="1" dock_location="left" y="0"/>
+  <window x="0" undocked="0" type="structure" visible="1" dock_location="left" y="0"/>
+  <window x="0" undocked="0" type="testbench" visible="1" dock_location="left" y="0"/>
+  <window x="0" undocked="0" type="watch" visible="1" dock_location="right" y="0"/>
+  <window x="0" undocked="0" type="drvrecadv" visible="1" dock_location="right" y="0"/>
+  <window x="0" undocked="0" type="streams" visible="1" dock_location="right" y="0"/>
+  <window x="0" undocked="0" type="transcript" visible="1" dock_location="bottom" y="0"/>
+  <window x="110" undocked="0" width="1440" height="854" type="rtl" visible="1" y="0"/>
+  <window x="9" undocked="1" width="1440" height="853" type="wave" visible="0" dock_location="bottom" y="0"/>
+  <window x="0" undocked="0" firstVisibleLine="1" type="source" visible="0" dock_location="center" path="/mnt/ncsudrive/a/ajoshi25/ECE-748_git/LC3_UVM_Verif/project_benches/decode/tb/testbench/hdl_top.sv" y="0"/>
+  <window x="0" undocked="0" firstVisibleLine="419" type="source" visible="1" dock_location="center" path="/mnt/apps/public/COE/mg_apps/questa2024.2/questasim/verilog_src/uvm-1.1d/src/base/uvm_root.svh" id="1" y="0"/>
  </window_config>
  <wave_file_mgr>
-  <waveFile tagName="sim" waveType="0" fileName="/mnt/ncsudrive/a/ajoshi25/ECE-748_git/LC3_UVM_Verif/project_benches/decode/sim/qwave.db"/>
+  <waveFile waveType="0" fileName="/mnt/ncsudrive/a/ajoshi25/ECE-748_git/LC3_UVM_Verif/project_benches/decode/sim/qwave.db" tagName="sim"/>
  </wave_file_mgr>
  <gui>
   <main_window visible="1">
@@ -36,63 +37,25 @@
     <tcl command="src activate source"/>
     <tcl command="src top 2"/>
    </sourcetclcommands>
-   <srcbrowser value_tooltip_mode="true" filepath="/mnt/apps/public/COE/mg_apps/questa2024.2/questasim/verilog_src/uvm-1.1d/src/base/uvm_root.svh" primary="true"/>
+   <srcbrowser primary="true" value_tooltip_mode="true" filepath="/mnt/apps/public/COE/mg_apps/questa2024.2/questasim/verilog_src/uvm-1.1d/src/base/uvm_root.svh"/>
    <sourcetclcommands>
     <tcl command="src activate source1"/>
-    <tcl command="src top 412"/>
+    <tcl command="src top 420"/>
    </sourcetclcommands>
    <edge_gui cur_selection="AnyEdge"/>
   </main_window>
-  <watchTower_cur_setting curActiveWaveFile="sim" customDisplayTimeUnitListStr="" curRadix="8" curDisplayTimeUnit="-11" curDisplayTimeUnitStr="10ps">
-   <curTime lowtime="70000" hightime="0"/>
+  <watchTower_cur_setting curActiveWaveFile="sim" curRadix="8" curDisplayTimeUnitStr="10ps" customDisplayTimeUnitListStr="" curDisplayTimeUnit="-11">
+   <curTime hightime="0" lowtime="70000"/>
   </watchTower_cur_setting>
   <files/>
   <structure selection="hdl_top"/>
   <testbench/>
   <watch/>
   <drvrecadv/>
+  <streams/>
   <transcript/>
-  <wave name="Wave0">
-   <timeunit value="13"/>
-   <frequnit value="2"/>
-   <showdiff value="0"/>
-  </wave>
  </gui>
- <wave_mgr sync_time_range="0">
-  <waveWindow swapRepresentationOfX="0" displayRadixWithValue="1" waveWidth="1072" signalHeight="18" secNudge="1" displayGrid="0" showSecCursor="1" showMarkers="1" alignBaseName="0" displayTimeUnit="-11" displayLeadingZeros="0" snapToEdge="1" valueWidth="86" value_tooltip="0" displayScopeName="1" displayTimeUnitStr="10ps" nameWidth="237" wintype="4" displayFileTag="1" trackViewToTime="1" justifySignalPath="Right" primNudge="1" displayGlobalView="1">
-   <window name="Wave0">
-    <timeunit value="13"/>
-    <frequnit value="2"/>
-    <showdiff value="0"/>
-   </window>
-   <viewPort>
-    <beginTime lowtime="0" hightime="0"/>
-    <endTime lowtime="70000" hightime="0"/>
-    <beginViewTime lowtime="53278" hightime="0"/>
-    <endViewTime lowtime="70000" hightime="0"/>
-    <beginLastViewTime lowtime="53278" hightime="0"/>
-    <endLastViewTime lowtime="70000" hightime="0"/>
-   </viewPort>
-   <primCursor lowtime="70000" hightime="0"/>
-   <secCursor lowtime="0" hightime="0"/>
-   <wavetclcommands>
-    <tcl command="wave update off"/>
-    <tcl command="wave clearselection"/>
-    <tcl commandblock="custom radix definitions"></tcl>
-    <tcl command="wave update off"/>
-    <tcl command="wave zoom range 53278 70000"/>
-    <tcl command="wave add hdl_top.LC3_de.clock -tag sim -radix hexadecimal"/>
-    <tcl command="wave add hdl_top.LC3_de.reset -tag sim -radix hexadecimal"/>
-    <tcl command="wave add hdl_top.LC3_de.enable_decode -tag sim -radix hexadecimal"/>
-    <tcl command="wave add hdl_top.LC3_de.dout -tag sim -radix hexadecimal"/>
-    <tcl command="wave add hdl_top.LC3_de.npc_in -tag sim -radix hexadecimal"/>
-    <tcl command="wave add uvm_test_top.de_env.agent_in.monitor.txn_stream -tag sim -radix string -expand -subitemconfig { instruction {-radix hexadecimal -select} npc {-radix hexadecimal -select} } -select"/>
-    <tcl command="wave update on"/>
-    <tcl command="wave top 0"/>
-    <tcl command=""/>
-   </wavetclcommands>
-  </waveWindow>
- </wave_mgr>
+ <wave_mgr sync_time_range="0"/>
  <mem_mgr/>
  <windows/>
 </session>

@@ -6,6 +6,8 @@ class decode_out_transaction extends uvm_transaction;
     bit         M_ctrl;
     bit [15:0]  ir;
     bit [15:0]  npc_out;
+    time start_time, end_time;
+    int transaction_view_h;
 
     function new (string name = "");
         super.new(name);
@@ -37,6 +39,18 @@ class decode_out_transaction extends uvm_transaction;
         end
 
     endfunction
+
+    virtual function void wave_view(int transaction_viewing_stream_h);
+       transaction_view_h = $begin_transaction(transaction_viewing_stream_h,"decode_out_transaction",start_time);
+       $add_attribute(transaction_view_h,E_ctrl,"E_ctrl");
+       $add_attribute(transaction_view_h,W_ctrl,"W_ctrl");
+       $add_attribute(transaction_view_h,M_ctrl,"M_ctrl");
+       $add_attribute(transaction_view_h,ir,"ir");
+       $add_attribute(transaction_view_h,npc_out,"npc_out");
+       $end_transaction(transaction_view_h,end_time);
+       $free_transaction(transaction_view_h);
+    endfunction
+
 
 
 endclass

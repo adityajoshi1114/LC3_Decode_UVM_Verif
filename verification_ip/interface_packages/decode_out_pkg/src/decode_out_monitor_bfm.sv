@@ -1,4 +1,3 @@
-`timescale 1ns / 10ps
 interface decode_out_monitor_bfm(decode_out_if sig_bndl);
 
     // Internal signals for ease of monitoring
@@ -24,36 +23,45 @@ interface decode_out_monitor_bfm(decode_out_if sig_bndl);
     assign en_de_i      =   sig_bndl.en_de_s;
 
     // Monitoring 
-    task monitor (output bit [5:0] e_cntrl, output bit m_cntrl, output bit [1:0] w_cntrl, output bit [15:0] Instr_Reg, output bit [15:0] npc_out);
+    task monitor (output bit [5:0] e_cntrl, output bit m_cntrl, output bit [1:0] w_cntrl, output bit [15:0] Instr_Reg, output bit [15:0] npc_out, output time start_t, output time end_t);
 
-        // Every output is generated at the posedge
-        @(posedge clock_i);
+        
+        // Only for valid transactions
+        if (!en_de_i) begin 
 
-        // Only take valid outputs
-        if (en_de_i) begin 
+            @(posedge en_de_i);
+            @(posedge clock_i);
+
+        end else begin 
+
+            // Start time    
+            start_t =$time;
+
+            // Capture values at the neg edge
+            @(negedge clock_i);
             e_cntrl     = e_cntrl_i;
             m_cntrl     = m_cntrl_i;
             w_cntrl     = w_cntrl_i;
             Instr_Reg   = Instr_Reg_i;
             npc_out     = npc_out_i;
-        end 
+
+            // Skip to the start of the next transaction
+            @(posedge clock_i);
+            
+            // End time
+            end_t = $time;
+
+        end
+
         
     endtask
 
     initial begin : wait_for_end
 
-        fork
-            begin 
-                @(posedge en_de_i);
-                @(negedge en_de_i);
-                stop = 1;
-            end
-            begin 
-                #200ms;
-            end
-        join_any
-        disable fork;
-
+        @(posedge en_de_i);
+        @(negedge en_de_i);
+        stop = 1;
+       
     end
 
     

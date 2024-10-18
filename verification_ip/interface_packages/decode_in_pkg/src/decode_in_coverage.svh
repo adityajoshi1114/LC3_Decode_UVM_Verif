@@ -16,7 +16,7 @@ class decode_in_coverage extends uvm_subscriber #(.T(decode_in_transaction));
     endfunction
 
     virtual function void write(T t);
-        //`uvm_info("Decode_in_Coverage","Transaction receieved",UVM_LOW);
+        `uvm_info("Decode_in_Coverage","Transaction receieved",UVM_HIGH);
         mntr_trx = t;
         decode_in_cg.sample();
     endfunction
