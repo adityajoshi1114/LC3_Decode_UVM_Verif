@@ -13,7 +13,8 @@ class decode_in_seq_item extends uvm_sequence_item;
     endfunction
 
     // Constraint to keep the opcode valid while randomizing
-    constraint valid_instr {opcode inside {[0:3],[5:7],[9:12],14};}
+    constraint valid_instr      {opcode inside {[0:3],[5:7],[9:12],14};}
+    constraint not_instr_tail   {opcode == 5'b1001 -> instr_tail == 6'b111111;}
 
     virtual function string convert2string();
         return $sformatf("Instruction:0x%x npc:0x%x",{opcode,instr_tail},next_pc);

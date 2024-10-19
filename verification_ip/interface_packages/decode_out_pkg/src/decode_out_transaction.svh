@@ -22,22 +22,12 @@ class decode_out_transaction extends uvm_transaction;
         if (!$cast(RHS,rhs)) return 0;
         return (
                 super.do_compare(rhs,comparer)
-                &&(e_compare(RHS.ir[15:12],RHS.E_ctrl))
+                &&(this.E_ctrl  == RHS.E_ctrl)
                 &&(this.W_ctrl  == RHS.W_ctrl)
                 &&(this.M_ctrl  == RHS.M_ctrl)
                 &&(this.ir      == RHS.ir)
                 &&(this.npc_out == RHS.npc_out)
                 );
-    endfunction
-
-    function bit e_compare (bit [3:0] opcode, bit [5:0] e);
-
-        if (opcode == 9) begin      // NOT
-            return (this.E_ctrl[5:1] == e[5:1]);
-        end else begin 
-            return (this.E_ctrl == e);
-        end
-
     endfunction
 
     virtual function void wave_view(int transaction_viewing_stream_h);
