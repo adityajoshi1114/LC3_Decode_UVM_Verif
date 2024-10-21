@@ -5,11 +5,10 @@ class decode_in_configuration extends uvm_object;
     virtual decode_in_monitor_bfm monitor_bfm_hndl;
 
     // Activity - 0 for passive and 1 for active
-    bit Activity;
+    uvm_active_passive_enum Activity;
 
     // Sequencer for decode_in_agent
     uvm_sequencer #(decode_in_seq_item) sqr;
-
     
     function new (string name = "");
         super.new(name);
@@ -26,7 +25,7 @@ class decode_in_configuration extends uvm_object;
     endfunction
 
     // Initialize Function
-    virtual function void initialize(bit activity, string interface_names[2]);
+    virtual function void initialize(uvm_active_passive_enum activity, string interface_names[2], string path_to_agent);
 
         Activity = activity;
     
@@ -41,7 +40,7 @@ class decode_in_configuration extends uvm_object;
 
         // Not required since we do direct assignments in this project for efficiency
         // Passes itself to its agent
-        // uvm_config_db#(decode_in_configuration)::set(null,path_to_agent,"conf_de_in_ag",this);
+        uvm_config_db#(decode_in_configuration)::set(null,path_to_agent,"conf_de_in_ag",this);
 
     endfunction
 

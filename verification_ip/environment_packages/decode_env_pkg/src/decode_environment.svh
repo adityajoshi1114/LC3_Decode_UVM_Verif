@@ -29,7 +29,7 @@ class decode_environment extends uvm_env;
         agent_out.conf = conf.de_out_config;
 
         // Assign flags to Scoreboard
-        scoreboard.wait_drain       = conf.scbd_drain;
+        scoreboard.wait_drain           = conf.scbd_drain;
         scoreboard.check_empty_eot      = conf.scbd_empty;
         scoreboard.check_activity_eot   = conf.scbd_active;
 

@@ -13,7 +13,7 @@ class decode_in_agent extends uvm_agent;
     decode_in_configuration                 conf;
 
     // This agent's activity state
-    bit activity;
+    uvm_active_passive_enum activity;
 
     function new (string name = "", uvm_component parent = null);
         super.new(name,parent);
@@ -27,11 +27,16 @@ class decode_in_agent extends uvm_agent;
         activity = conf.Activity;
 
         // Instantiate all the components of this agent  
-        sqr = new("sqr",this);
         monitor = new("monitor",this);
-        driver = new("driver",this);
         coverage = new("coverage",this);
         ap = new("ap",this);
+        
+        // Only instantiate sqr and driver if active
+        if (activity == UVM_ACTIVE) begin 
+            sqr = new("sqr",this);
+            driver = new("driver",this);
+        end
+        
 
         // Not required since we do direct assignments in this project for efficiency
         // // Get the configuration handle
@@ -52,9 +57,10 @@ class decode_in_agent extends uvm_agent;
     
     virtual function void connect_phase (uvm_phase phase);        
         
-        // Connect Sequencer and Driver's port export (s)
-        driver.seq_item_port.connect(sqr.seq_item_export);
-
+        // Connect Sequencer and Driver's port export (s) if ACTIVE
+        if (activity == UVM_ACTIVE) begin 
+            driver.seq_item_port.connect(sqr.seq_item_export);
+        end
         // Connect Monitor and Coverage
         monitor.ap.connect(coverage.analysis_export);
 

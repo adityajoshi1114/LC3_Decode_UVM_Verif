@@ -4,9 +4,9 @@ interface decode_in_if
 (
     input wire           clock_s,
     input wire           reset_s,
-    input wire [15:0]    dout_s,
-    input wire           enable_decode_s,
-    input wire [15:0]    npc_in_s
+    inout wire [15:0]    dout_s,
+    inout wire           enable_decode_s,
+    inout wire [15:0]    npc_in_s
     
 );
 

@@ -15,11 +15,11 @@ module hdl_top ();
     wire [15:0]     next_pc;
 
     // Decode Out signals
-    bit [1:0]       w_cntrl;
-    bit             m_cntrl;
-    bit [5:0]       e_cntrl;
-    bit [15:0]      Instr_Reg;
-    bit [15:0]      next_pc_out;
+    wire [1:0]       w_cntrl;
+    wire             m_cntrl;
+    wire [5:0]       e_cntrl;
+    wire [15:0]      Instr_Reg;
+    wire [15:0]      next_pc_out;
 
     // Generate the clock
     initial begin 

@@ -12,7 +12,8 @@ class test_base extends uvm_test;
     
     // Config Initialize variables
     string interface_names [4];
-    bit [1:0] Activity_flags;
+    string env_path;
+    uvm_active_passive_enum [1:0] Activity_flags;
     bit [2:0] scbd_flags;
 
     function new (string name = "", uvm_component parent = null);
@@ -30,9 +31,11 @@ class test_base extends uvm_test;
         interface_names[1]  = "de_id_bfm";
         interface_names[2]  = "de_om_bfm";
         interface_names[3]  = "null";
-        Activity_flags      = 2'b01;
+        Activity_flags[0]   = UVM_ACTIVE;
+        Activity_flags[1]   = UVM_PASSIVE;
         scbd_flags          = 3'b111;
-        de_env_config.initialize(Activity_flags,interface_names,scbd_flags);
+        env_path            = "uvm_test_top.de_env";
+        de_env_config.initialize(Activity_flags,interface_names,env_path,scbd_flags);
 
         // Component Heirarchy
         de_env      = new("de_env",this);

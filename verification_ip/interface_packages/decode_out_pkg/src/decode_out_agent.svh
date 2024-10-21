@@ -10,7 +10,7 @@ class decode_out_agent extends uvm_agent;
     uvm_analysis_port #(decode_out_transaction) ap;
 
     // This agent's activity state
-    bit activity;
+    uvm_active_passive_enum activity;
 
     function new (string name = "", uvm_component parent = null);
         super.new(name,parent);
